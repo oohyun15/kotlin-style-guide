@@ -1,9 +1,26 @@
-[//]: # (title: Coding conventions)
+---
+layout: base
+title: 코틀린 스타일 가이드
+permalink: '/'
+---
 
-Commonly known and easy-to-follow coding conventions are vital for any programming language.
-Here we provide guidelines on the code style and code organization for projects that use Kotlin.
+# 코틀린 스타일 가이드
 
-## Configure style in IDE
+흔히 잘 알려져 있고 쉽게 따라할 수 있는 코딩 컨벤션은 모든 프로그래밍 언어에서 중요합니다.
+이 문서는 코틀린을 사용하는 프로젝트의 코드 스타일과 코드 구성에 대한 가이드라인을 제공합니다.
+
+## 목차
+
+* [IDE에서의 코드 스타일 설정](#IDE에서의-코드-스타일-설정)
+* [소스 코드 구성](#소스-코드-구성)
+* [네이밍 규칙](#네이밍-규칙)
+* [코드 형식](#코드-형식)
+* [주석 작성](#주석-작성)
+* [중복 코드 방지](#중복-코드-방지)
+* [언어 특성의 관용적 사용](#언어-특성의-관용적-사용)
+* [라이브러리 코딩 컨벤션](#라이브러리-코딩-컨벤션)
+
+## IDE에서의 코드 스타일 설정
 
 Two most popular IDEs for Kotlin - [IntelliJ IDEA](https://www.jetbrains.com/idea/) and [Android Studio](https://developer.android.com/studio/)
 provide powerful support for code styling. You can configure them to automatically format your code in consistence with
@@ -21,7 +38,7 @@ the given code style.
 2. Switch on **Incorrect formatting** inspection.
 Additional inspections that verify other issues described in the style guide (such as naming conventions) are enabled by default.
 
-## Source code organization
+## 소스 코드 구성
 
 ### Directory structure
 
@@ -129,7 +146,7 @@ interspersed with additional private methods used for the implementation).
 
 Always put overloads next to each other in a class.
 
-## Naming rules
+## 네이밍 규칙
 
 Package and class naming rules in Kotlin are quite simple:
 
@@ -234,7 +251,7 @@ When using an acronym as part of a declaration name, follow these rules:
 * For two-letter acronyms, use uppercase for both letters. For example, `IOStream`.
 * For acronyms longer than two letters, capitalize only the first letter. For example, `XmlFormatter` or `HttpInputStream`.
 
-## Formatting
+## 코드 형식
 
 ### Indentation
 
@@ -803,7 +820,7 @@ fun printMeanValue() {
 printMeanValue()
 ```
 
-## Documentation comments
+## 주석 작성
 
 For longer documentation comments, place the opening `/**` on a separate line and begin each subsequent line
 with an asterisk:
@@ -843,7 +860,7 @@ fun abs(number: Int): Int { /*...*/ }
 fun abs(number: Int): Int { /*...*/ }
 ```
 
-## Avoid redundant constructs
+## 중복 코드 방지
 
 In general, if a certain syntactic construction in Kotlin is optional and highlighted by the IDE
 as redundant, you should omit it in your code. Do not leave unnecessary syntactic elements in code
@@ -887,7 +904,7 @@ get() = $$"""
     """
 ```
 
-## Idiomatic use of language features
+## 언어 특성의 관용적 사용
 
 ### Immutability
 
@@ -1161,7 +1178,7 @@ fun main() {
 Kotlin provides a set of functions to execute a block of code in the context of a given object: `let`, `run`, `with`, `apply`, and `also`.
 For the guidance on choosing the right scope function for your case, refer to [Scope Functions](scope-functions.md).
 
-## Coding conventions for libraries
+## 라이브러리 코딩 컨벤션
 
 When writing libraries, it's recommended to follow an additional set of rules to ensure API stability:
 
