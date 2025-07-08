@@ -14,7 +14,7 @@ permalink: '/'
 * [IDE에서의 코드 스타일 설정](#IDE에서의-코드-스타일-설정)
 * [소스 코드 구성](#소스-코드-구성)
 * [네이밍 규칙](#네이밍-규칙)
-* [코드 형식](#코드-형식)
+* [포맷팅](#포맷팅)
 * [주석 작성](#주석-작성)
 * [중복 코드 방지](#중복-코드-방지)
 * [언어 특성의 관용적 사용](#언어-특성의-관용적-사용)
@@ -22,21 +22,19 @@ permalink: '/'
 
 ## IDE에서의 코드 스타일 설정
 
-Two most popular IDEs for Kotlin - [IntelliJ IDEA](https://www.jetbrains.com/idea/) and [Android Studio](https://developer.android.com/studio/)
-provide powerful support for code styling. You can configure them to automatically format your code in consistence with
-the given code style. 
+코틀린에서 유명한 IDE인 [IntelliJ IDEA](https://www.jetbrains.com/idea/)와 [Android Studio](https://developer.android.com/studio/)는 강력한 코드 스타일을 지원합니다.
+여러분의 코드를 주어진 코드 스타일에 맞게 자동으로 포맷팅 하도록 구성할 수 있습니다.
  
-### Apply the style guide
+### 스타일 가이드 적용하기
 
-1. Go to **Settings/Preferences | Editor | Code Style | Kotlin**.
-2. Click **Set from...**.
-3. Select **Kotlin style guide** .
+1. **Settings/Preferences | Editor | Code Style | Kotlin** 로 이동
+2. **Set from...** 클릭
+3. **Kotlin style guide** 선택
 
-### Verify that your code follows the style guide
+### 스타일 가이드에 맞는 코드인지 확인하기
 
-1. Go to **Settings/Preferences | Editor | Inspections | General**.
-2. Switch on **Incorrect formatting** inspection.
-Additional inspections that verify other issues described in the style guide (such as naming conventions) are enabled by default.
+1. **Settings/Preferences | Editor | Inspections | General** 로 이동
+2. **Incorrect formatting** 활성화. 스타일 가이드에서 다루고 있는 다른 컨벤션들(예: 네이밍 규칙) 확인도 기본적으로 활성화 됩니다.
 
 ## 소스 코드 구성
 
@@ -251,7 +249,7 @@ When using an acronym as part of a declaration name, follow these rules:
 * For two-letter acronyms, use uppercase for both letters. For example, `IOStream`.
 * For acronyms longer than two letters, capitalize only the first letter. For example, `XmlFormatter` or `HttpInputStream`.
 
-## 코드 형식
+## 포맷팅
 
 ### Indentation
 
