@@ -1,9 +1,3 @@
----
-layout: base
-title: 코틀린 스타일 가이드
-permalink: '/'
----
-
 # 코틀린 스타일 가이드
 
 흔히 잘 알려져 있고 쉽게 따라할 수 있는 코딩 컨벤션은 모든 프로그래밍 언어에서 중요합니다.
@@ -38,51 +32,39 @@ permalink: '/'
 
 ## 소스 코드 구성
 
-### Directory structure
+### 디렉토리 구조
 
-In pure Kotlin projects, the recommended directory structure follows the package structure with
-the common root package omitted. For example, if all the code in the project is in the `org.example.kotlin` package and its
-subpackages, files with the `org.example.kotlin` package should be placed directly under the source root, and
-files in `org.example.kotlin.network.socket` should be in the `network/socket` subdirectory of the source root.
+순수한 코틀린 프로젝트에선 추천 디렉토리 구조는 공통 루트 패키지를 생략한 패키지 구조를 따릅니다. 예를 들어 프로젝트에 있는 모든 코드가 `org.example.kotlin` 패키지와 그 하위 패키지들에 있다면,
+`org.example.kotlin` 패키지 파일들은 반드시 루트 디렉토리 바로 아래에 위치해야 하고, `org.example.kotlin.network.socket` 패키지 파일들은 반드시 루트 디렉토리의 `network/socket` 하위 디렉토리에 위치해야 합니다.
 
->On JVM: In projects where Kotlin is used together with Java, Kotlin source files should reside in the same 
->source root as the Java source files, and follow the same directory structure: each file should be stored in the 
->directory corresponding to each package statement.
->
-{style="note"}
+> JVM에서 자바와 함께 사용하고 있는 코틀린 프로젝트에선 코틀린 소스 파일들은 반드시 자바의 소스 파일들과 같은 소스 루트에 위치해야 하고,
+> 같은 디렉토리 구조를 따라야 합니다. 각 파일들은 각 패키지 문(statement)에 해당하는 디렉토리에 저장되어야 합니다.
 
-### Source file names
+### 파일 이름
 
-If a Kotlin file contains a single class or interface (potentially with related top-level declarations), its name should be the same
-as the name of the class, with the `.kt` extension appended. It applies to all types of classes and interfaces.
-If a file contains multiple classes, or only top-level declarations, choose a name describing what the file contains, and name the file accordingly.
-Use [upper camel case](https://en.wikipedia.org/wiki/Camel_case), where the first letter of each word is capitalized.
-For example, `ProcessDeclarations.kt`.
+만약 코틀린 파일이 하나의 클래스 또는 인터페이스(관련된 탑 레벨 선언이 있을 수 있음)를 포함하고 있다면, 파일 이름은 반드시 `.kt` 확장자를 붙인 클래스 이름과 동일해야 합니다. 이는 모든 타입의 클래스와 인터페이스에 적용됩니다.
+만약 파일이 여러 클래스 또는 탑 레벨 선언들만 포함하고 있다면, 이 파일이 포함하고 있는 걸 설명할 수 있는 이름을 선택하고 그에 맞게 파일 이름을 지어야 합니다.
+각 단어의 첫 글자는 대문자로 쓰는 [upper camel case](https://en.wikipedia.org/wiki/Camel_case)를 사용하세요. (e.g.`ProcessDeclarations.kt`)
 
-The name of the file should describe what the code in the file does. Therefore, you should avoid using meaningless
-words such as `Util` in file names.
+파일 이름은 반드시 파일에 있는 코드가 하는 것을 설명해야 합니다. 그러므로, 당신은 `Util`과 같은 의미 없는 단어들을 파일 이름에서 사용하는 걸 피해야 합니다.
 
-#### Multiplatform projects
+#### 멀티플랫폼 프로젝트
 
-In multiplatform projects, files with top-level declarations in platform-specific source sets should have a suffix
-associated with the name of the source set. For example:
+멀티플랫폼 프로젝트에선 플랫폼 별 소스 셋(set)에 있는 탑 레벨 선언 파일들은 반드시 소스 셋 이름과 관련된 접미사를 붙여야 합니다. 예시는 다음과 같습니다.
 
 * **jvm**Main/kotlin/Platform.**jvm**.kt
 * **android**Main/kotlin/Platform.**android**.kt
 * **ios**Main/kotlin/Platform.**ios**.kt
 
-As for the common source set, files with top-level declarations should not have a suffix. For example, `commonMain/kotlin/Platform.kt`.
+공통 소스 셋에서는 탑 레벨 선언 파일들은 반드시 접미사가 없어야 합니다. (e.g. `commonMain/kotlin/Platform.kt`)
 
-##### Technical details {initial-collapse-state="collapsed" collapsible="true"}
+##### 기술적 세부사항
 
-We recommend following this file naming scheme in multiplatform projects due to JVM limitations: it doesn't allow
-top-level members (functions, properties).
+JVM의 한계 때문에 멀티플랫폼 프로젝트에서 다음과 같은 파일 명명 방식을 따르는 걸 권장합니다: 탑 레벨 멤버(함수, 프로퍼티)들을 허용하지 않습니다.
 
-To work around this, the Kotlin JVM compiler creates wrapper classes (so-called "file facades") that contain top-level
-member declarations. File facades have an internal name derived from the file name.
+이 문제를 해결하기 위해서 코틀린 JVM 컴파일러는 탑 레벨 멤버 선언을 포함하고 있는 래퍼 클래스(파일 퍼사드(file facade))를 생성합니다. 이 파일 퍼사드는 파일 이름에서 파생된 내부 이름을 가집니다.
 
-In turn, JVM doesn't allow several classes with the same fully qualified name (FQN). This might lead to situations when
-a Kotlin project cannot be compiled to JVM:
+결과적으로 JVM은 같은 완전 한정 이름(fully qualified name, FQN)을 가진 여러 클래스들을 허용하지 않습니다. 이 문제는 코틀린 프로젝트가 JVM에 컴파일 되지 못하는 문제를 야기할 수 있습니다.
 
 ```none
 root
@@ -90,11 +72,9 @@ root
 |- jvmMain/kotlin/myPackage/Platform.kt // contains 'fun multiply() { }'
 ```
 
-Here both `Platform.kt` files are in the same package, so the Kotlin JVM compiler produces two file facades, both of which
-have FQN `myPackage.PlatformKt`. This produces the "Duplicate JVM classes" error.
+위의 두 `Platform.kt` 파일은 같은 패키지에 위치하고 있기 때문에 코틀린 JVM 컴파일러는 둘 다 FQN `myPackage.PlatformKt`를 가진 두 개의 파일 퍼사드를 생성합니다. 이는 "Duplicate JVM classes" 에러를 발생시킵니다.
 
-The simplest way to avoid that is renaming one of the files according to the guideline above. This naming scheme helps
-avoid clashes while retaining code readability.
+위 문제를 피하기 위한 가장 간단한 방법은 위 가이드라인에 따라 파일 하나를 재 명명(rename) 하는 것입니다. 이 명명 규칙은 코드 가독성을 유지하면서 이름 충돌을 피하는 데 도움이 됩니다.
 
 > There are two scenarios where these recommendations may seem redundant, but we still advise to follow them:
 > 
