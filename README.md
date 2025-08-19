@@ -74,21 +74,17 @@ root
 
 위의 두 `Platform.kt` 파일은 같은 패키지에 위치하고 있기 때문에 코틀린 JVM 컴파일러는 둘 다 FQN `myPackage.PlatformKt`를 가진 두 개의 파일 퍼사드를 생성합니다. 이는 "Duplicate JVM classes" 에러를 발생시킵니다.
 
-위 문제를 피하기 위한 가장 간단한 방법은 위 가이드라인에 따라 파일 하나를 재 명명(rename) 하는 것입니다. 이 명명 규칙은 코드 가독성을 유지하면서 이름 충돌을 피하는 데 도움이 됩니다.
+위 문제를 피하기 위한 가장 간단한 방법은 위 가이드라인에 따라 파일 하나를 재 명명(rename) 하는 것입니다. 이 네이밍 규칙은 코드 가독성을 유지하면서 네이밍 충돌을 피하는 데 도움이 됩니다.
 
-> There are two scenarios where these recommendations may seem redundant, but we still advise to follow them:
-> 
-> * Non-JVM platforms don't have issues with duplicating file facades. However, this naming scheme can help you keep
-> file naming consistent.
-> * On JVM, if source files don't have top-level declarations, the file facades aren't generated, and you won't face
-> naming clashes.
-> 
->   However, this naming scheme can help you avoid situations when a simple refactoring
-> or an addition could include a top-level function and result in the same "Duplicate JVM classes" error.
-> 
-{style="tip"}
+> 이러한 권장 사항이 불필요해 보이는 두 가지 시나리오가 있지만, 여전히 이 사항을 따르는 것이 좋습니다.
+>
+> * 비 JVM 플랫폼에서는 파일 퍼사드를 복제하는 데 문제가 없습니다. 하지만 이러한 네이밍 규칙은 파일 네이밍 하는 걸 일관되게 유지하는 데 도움이 됩니다.
+>
+> * JVM 플랫폼에서는 만약 소스 파일들에 탑 레벨 선언들이 없다면, 이 파일 퍼사드는 생성되지 않고 네이밍 충돌을 겪지 않습니다.
+>
+>   하지만 이 네이밍 규칙은 단순한 리팩토링이나 추가 기능에 탑 레벨 함수를 포함되어 동일한 "Duplicate JVM classes" 에러를 야기할 수 있는 상황을 피하는 데 도움이 됩니다.
 
-### Source file organization
+### 소스 파일 구성
 
 Placing multiple declarations (classes, top-level functions or properties) in the same Kotlin source file is encouraged
 as long as these declarations are closely related to each other semantically, and the file size remains reasonable
